@@ -1,0 +1,42 @@
+PROBLÉMO! — JEU DE PROBLÈMES POUR LE CP
+=======================================
+
+CONTENU
+  index.html             Le jeu complet, sans connexion extérieure
+  manifest.webmanifest   Informations d'installation mobile
+  sw.js                  Mise en cache pour jouer hors connexion
+  apple-touch-icon.png   Icône pour l’écran d’accueil sur iPhone
+  icon-192.png           Icône Android et navigateur (192 px)
+  icon-512.png           Icône Android et navigateur (512 px)
+
+NIVEAUX
+  Facile : 10 problèmes d'ajout ou de retrait avec des nombres jusqu'à 10.
+  Moyen : problèmes jusqu'à 20, ajouts, retraits, quantités manquantes et comparaisons.
+  Avancé : nombres jusqu'à 50, problèmes à deux étapes et données inutiles, ainsi que comparaisons et tout/parties.
+
+Chaque partie : 10 QCM, 3 choix, jusqu'à 2 essais. Après deux erreurs, la bonne
+réponse et le calcul sont affichés. Les jetons sont facultatifs. Bilan en fin
+partie. Les meilleures performances et l’historique de questions sont mémorisés
+localement sur l’appareil, sans compte utilisateur.
+
+POUR PUBLIER SUR GITHUB PAGES
+  1. Créer un dépôt PUBLIC intitulé « problemo-cp » sur github.com.
+  2. Décompresser ce ZIP.
+  3. Ouvrir le dossier « problemo-cp » et envoyer TOUT SON CONTENU à la racine
+     du dépôt (index.html doit être visible dès la première page GitHub).
+  4. Ouvrir Settings > Pages.
+  5. Source : Deploy from a branch. Branche : main. Dossier : /(root).
+  6. Enregistrer puis ouvrir : https://VOTRE-PSEUDO.github.io/problemo-cp/
+
+POUR INSTALLER SUR IPHONE
+  Ouvrir le site publié dans Safari > Partager > Sur l'écran d'accueil > Ajouter.
+  Si la précédente icône reste affichée, supprimer l'ancien raccourci et le recréer.
+  Les images sont placées À LA RACINE du dépôt, et non dans « icons/ ».
+
+REMARQUES
+  Le lien fonctionne sur tous les appareils après publication sur HTTPS.
+  Après une première visite en ligne et le chargement du cache, le jeu est conçu
+  pour pouvoir fonctionner sans réseau.
+  La progression locale peut disparaître si les données du navigateur sont effacées.
+  Utilisation pédagogique avec un adulte disponible pour accompagner le déchiffrage
+  des énoncés quand nécessaire.

@@ -1,0 +1,26 @@
+{
+  "name": "ProblémO! — Petits problèmes CP",
+  "short_name": "ProblémO!",
+  "description": "Résoudre de petits problèmes au CP avec 3 niveaux, 10 problèmes par partie et des jetons à manipuler.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7f8fe",
+  "theme_color": "#4167e7",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

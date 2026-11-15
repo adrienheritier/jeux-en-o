@@ -1,0 +1,15 @@
+L’UNIVERS DES JEUX EN O!
+
+Pour publier sur GitHub Pages :
+1. Décompressez ce ZIP.
+2. Ouvrez votre dépôt GitHub « jeux-en-o ».
+3. Cliquez sur Add file > Upload files.
+4. Glissez TOUS les éléments visibles DANS le dossier décompressé : index.html, sw.js, manifest.webmanifest, les images ET les dossiers calculo, lecturo, problemo, shared. Ne déposez pas le ZIP.
+5. Validez Commit changes.
+6. Activez Settings > Pages > Deploy from a branch > main > /(root).
+7. Contrôlez que index.html est au même niveau que README.md dans le dépôt.
+
+Le site contient CalculO! (7 niveaux), LecturO! (3 niveaux) et ProblémO! (3 niveaux).
+Les profils, les statistiques et les coupes sont stockés localement dans le navigateur utilisé (ne sont pas synchronisés entre appareils).
+Coupes par niveau : bronze à 8/10, argent à 9/10 et or à 10/10. La meilleure coupe par niveau est conservée ; au total 13 emplacements de coupes.
+L’application peut fonctionner hors connexion après installation et mise en cache initiale.

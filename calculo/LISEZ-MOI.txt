@@ -1,0 +1,32 @@
+CALCULO! - CALCUL MENTAL POUR LE CP
+
+L'application comprend :
+- 4 niveaux d'additions et 3 niveaux de soustractions.
+- 10 calculs différents par partie.
+- 2 essais maximum par question ; puis affichage de la correction.
+- Un bilan détaillé et un bouton pour rejouer (nouveaux calculs).
+- Un fonctionnement sans compte et sans collecte de données.
+
+UTILISATION IMMÉDIATE (ordinateur)
+Ouvrez index.html dans un navigateur récent. Aucune installation nécessaire.
+
+SUR TÉLÉPHONE / TABLETTE (application installable)
+Publiez TOUS les fichiers du dossier sur un hébergement HTTPS (par exemple GitHub Pages).
+Puis :
+- Sur iPhone/iPad : ouvrez l'URL dans Safari > Partager > Sur l'écran d'accueil > Ajouter.
+- Sur Android : ouvrez l'URL dans Chrome > Installer l'application ou Ajouter à l'écran d'accueil.
+Une fois la première page chargée, l'application fonctionne aussi hors connexion.
+
+À NOTER
+L'ouverture de index.html directement dans l'app Fichiers sur iPhone ne garantit
+pas un fonctionnement correct. Pour installer sur iPhone, utilisez une URL HTTPS.
+Le fichier index.html est autonome pour tous les calculs et le jeu (pas besoin d'internet).
+
+RÈGLES DE CALCUL
+Addition 1 : chiffres de 1 à 9.
+Addition 2 : de 11 à 39, plus un chiffre de 1 à 9.
+Addition 3 : deux nombres à deux chiffres, sans retenue, somme inférieure à 100.
+Addition 4 : deux nombres à deux chiffres, avec retenue sur les unités, somme < 100.
+Soustraction 1 : deux chiffres, résultat positif ou nul.
+Soustraction 2 : de 11 à 39, moins un chiffre de 1 à 9.
+Soustraction 3 : deux nombres à deux chiffres, sans emprunt, résultat positif ou nul.

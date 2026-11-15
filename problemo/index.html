@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4167e7">
+<meta name="description" content="ProblémO! Jeu de résolution de petits problèmes pour le CP : 3 niveaux, 10 problèmes, jetons à manipuler, 2 essais et un bilan.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ProblémO!">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=1">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<title>ProblémO! · Petits problèmes CP</title>
+<style>
+:root{--ink:#202944;--sub:#67738d;--blue:#4167e7;--blue-d:#304fbd;--bg:#f7f8fe;--white:#fff;--line:#e7ebf6;--mint:#16875f;--mint-bg:#eaf9f1;--red:#c93756;--red-bg:#fff0f3;--orange:#f3a24b;--shadow:0 15px 38px rgba(43,65,128,.075)}
+*,*::before,*::after{box-sizing:border-box}
+html{min-height:100%;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100svh;background:radial-gradient(circle at 10% 4%,#e5eaff 0,transparent 36%),radial-gradient(circle at 92% 75%,#e6f9f3 0,transparent 38%),var(--bg);font-family:ui-rounded,"SF Pro Rounded","Trebuchet MS",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);overscroll-behavior-y:none}
+button{font:inherit;cursor:pointer;touch-action:manipulation}button:disabled{cursor:default}button:focus-visible{outline:3px solid #f6c35c;outline-offset:3px}button:active:not(:disabled){transform:scale(.985)}
+.shell{width:min(100%,530px);min-height:100svh;margin:auto;padding:env(safe-area-inset-top) 18px calc(28px + env(safe-area-inset-bottom))}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:23px 3px 22px;gap:10px}
+.brand{display:flex;align-items:center;gap:11px}.brand-mark{width:45px;height:45px;flex:0 0 45px;display:grid;place-items:center;color:#fff;font-size:29px;font-weight:950;background:var(--blue);box-shadow:0 8px 20px #4167e72e;transform:rotate(-7deg);border-radius:15px}.brand-name{font-size:25px;letter-spacing:-1.1px;font-weight:950;white-space:nowrap}.brand-name span{color:var(--blue)}.top-note{color:var(--sub);font-size:11px;letter-spacing:.07em;font-weight:900;text-transform:uppercase}
+.screen{animation:fadein .2s ease both}@keyframes fadein{from{opacity:.5;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.hero{position:relative;overflow:hidden;background:linear-gradient(145deg,#4269eb,#6c82ed);border-radius:29px;color:white;padding:26px 24px 32px;box-shadow:0 19px 42px #3c60e72b;margin-bottom:25px}.hero:before,.hero:after{position:absolute;content:"";pointer-events:none;width:190px;height:190px;border:1px solid #ffffff4c;border-radius:50%;right:-72px;top:-75px}.hero:after{width:120px;height:120px;right:38px;top:auto;bottom:-80px;background:#ffffff0f}.hero-kicker{text-transform:uppercase;letter-spacing:.13em;font-weight:850;font-size:12px;color:#e6ebff}.hero h1{font-size:clamp(28px,7.3vw,39px);letter-spacing:-1.35px;line-height:1.15;margin:13px 0 16px;max-width:380px}.hero p{font-size:15.5px;line-height:1.62;color:#f5f7ff;max-width:350px;margin:0}.hero-star{position:absolute;right:18px;bottom:17px;font-size:39px;color:#ffe18b;transform:rotate(18deg)}
+.choose-title{font-size:19px;font-weight:950;letter-spacing:-.4px;margin:0 0 13px}.level-list{display:grid;gap:12px}.level{width:100%;display:flex;align-items:center;text-align:left;gap:15px;border:1.5px solid var(--line);background:#fff;border-radius:23px;box-shadow:0 5px 18px #32407c0a;padding:16px;min-height:104px}.level:active{border-color:var(--blue)}.level-symbol{height:58px;width:58px;flex:0 0 58px;border-radius:20px;background:#edf1ff;color:var(--blue);font-size:27px;font-weight:950;display:grid;place-items:center}.level:nth-child(2) .level-symbol{background:#fff2df;color:#c47b20}.level:nth-child(3) .level-symbol{background:#e2f7f1;color:#148b73}.level-copy{flex:1;min-width:0}.level-name{display:block;font-weight:950;font-size:18px;letter-spacing:-.3px}.level-desc{display:block;font-size:13px;color:var(--sub);line-height:1.5;margin-top:3px}.level-mini{display:block;margin-top:5px;color:#9aa4b8;font-size:12px;font-weight:700}.level-arrow{color:#bdc4d7;font-size:30px}.best{display:block;margin-top:6px;color:#ad7520;font-size:12px;font-weight:850}.mini-features{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:19px 0}.mini-feature{border:1px solid var(--line);background:#ffffffad;text-align:center;border-radius:15px;padding:11px 5px;color:#7c87a4;font-size:11px;line-height:1.45}.mini-feature strong{display:block;font-size:17px;color:#4b5879}.footer-hint{text-align:center;color:#8290a9;font-size:12.5px;line-height:1.5;margin:22px 0 0}
+.game-top{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:14px 0 17px}.go-back{min-width:44px;height:44px;border:none;display:grid;place-items:center;border-radius:14px;background:#fff;box-shadow:0 4px 11px #475b9a19;color:var(--blue-d);font-weight:700;font-size:29px}.game-top-title{text-align:center;flex:1}.game-top-title strong{display:block;font-size:16px;font-weight:900}.game-top-title small{display:block;font-size:12px;color:var(--sub);margin-top:3px}.top-spacer{width:44px}.progress-heading{display:flex;justify-content:space-between;color:var(--sub);font-size:13px;font-weight:800;margin:0 1px 10px}.progress-heading strong{color:var(--ink)}.progress-dots{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-bottom:17px}.dot{height:9px;border-radius:20px;background:#e2e7f4}.dot.done{background:#81d5a9}.dot.missed{background:#f99bab}.dot.current{background:var(--blue)}
+.question-card{background:#fff;border:1px solid #e8edf7;box-shadow:var(--shadow);border-radius:27px;padding:19px 18px 22px}.problem-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.task-label{background:#eff2ff;color:var(--blue-d);padding:8px 10px;font-weight:900;text-transform:uppercase;letter-spacing:.025em;font-size:11px;border-radius:25px}.story-emoji{font-size:32px;line-height:1}.passage{font-size:clamp(19px,5.25vw,23px);line-height:1.58;letter-spacing:.006em;font-weight:680;margin:22px 0 14px;overflow-wrap:break-word}.question-line{font-size:clamp(18px,5.2vw,22px);color:#294074;line-height:1.5;font-weight:950;margin:0;padding-top:15px;border-top:1px solid #e9edf7}
+.tool-wrap{margin:13px 0 0}.tool-toggle{border:1.5px dashed #adbef4;border-radius:17px;min-height:48px;width:100%;display:flex;align-items:center;justify-content:space-between;background:#f1f5ff;color:#2f56bf;font-weight:900;padding:12px 15px;text-align:left;font-size:14px}.tool-toggle>span:last-child{font-size:21px}.tool-panel{background:white;border:1px solid #dfe6f7;border-top:0;border-radius:0 0 18px 18px;margin:-9px 0 0;padding:22px 15px 14px}.tool-title{font-size:14px;font-weight:950;margin-bottom:6px}.tool-hint{font-size:12.5px;color:var(--sub);margin:0 0 14px;line-height:1.5}.counter-count{display:flex;align-items:center;justify-content:space-between;background:#f8faff;border-radius:12px;padding:9px 14px;font-weight:800;color:#556587;font-size:13px}.counter-count strong{font-size:22px;color:var(--blue-d)}.counter-display{min-height:85px;display:flex;align-items:center;justify-content:center;padding:14px 7px}.counter-groups{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}.ten-block{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);gap:3px;padding:7px;background:#edf2ff;border:1px solid #c7d5fb;border-radius:10px}.ten-block i{background:#4b70e6;width:9px;height:9px;border-radius:50%}.loose-counters{display:flex;flex-wrap:wrap;gap:4px;max-width:78px}.single-counter{width:14px;height:14px;border-radius:50%;background:#f1a33f;box-shadow:0 2px 0 #d78726}.empty-counter{font-size:13px;color:#9ba4b9}.tool-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.tool-buttons button{display:flex;align-items:center;justify-content:center;gap:9px;border:1.5px solid #dbe2f5;background:#fff;color:#324d89;min-height:48px;border-radius:14px;font-size:13px;font-weight:900}.tool-buttons button span{font-size:23px;line-height:1}.tool-buttons button:last-child{background:#edf2ff;color:#3156bd;border-color:#cddaff}.tool-buttons button:disabled{opacity:.45}.tool-footer{display:flex;align-items:center;justify-content:space-between;gap:7px;color:#8893ac;font-size:10.5px;margin-top:12px}.tool-footer button{border:0;background:none;color:var(--blue-d);font-weight:850;padding:5px}.answer-heading{color:#566381;font-size:13px;font-weight:900;margin:20px 3px 11px}.option-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.option{position:relative;min-height:86px;padding:12px 5px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:2px solid #e0e6f4;border-radius:19px;background:#fff;color:var(--ink);font-weight:950}.option-letter{position:absolute;top:6px;left:8px;font-size:11px;color:#98a4bd;background:#f3f5fa;min-width:22px;height:21px;display:grid;place-items:center;border-radius:7px}.answer-number{font-size:35px;line-height:1.15}.answer-unit{font-size:10px;color:#9da8bf}.option.selected{border-color:var(--blue);background:#eef2ff;box-shadow:0 4px 16px #3f68df1c}.option.selected .option-letter{background:var(--blue);color:white}.option.wrong{border-color:#f2a5b2;background:#fff2f3;color:#b54962}.option.wrong .option-letter{background:#d96a7f;color:white}.option.correct{border-color:#83d4ad;background:#eefbf3;color:#0e8a5b}.option.correct .option-letter{background:#1b9a70;color:white}.option:disabled{opacity:1}
+.feedback{margin-top:13px;min-height:55px;padding:11px 12px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;border-radius:17px;gap:3px}.feedback.good{background:var(--mint-bg);color:var(--mint)}.feedback.bad{background:var(--red-bg);color:var(--red)}.feedback.idle{background:#edf0fa;color:#7d89a5}.feedback-title{font-size:17px;letter-spacing:.045em;font-weight:950}.feedback-sub{font-size:13px;line-height:1.4;font-weight:780}.reason{margin-top:11px;background:#fff9ed;border:1px solid #f6dfb3;border-radius:15px;padding:12px 13px}.reason span{font-size:12px;font-weight:950;color:#a56a14}.reason p{font-size:15px;font-weight:800;line-height:1.55;color:#705022;margin:6px 0 0}.action-area{margin-top:14px}.primary{width:100%;display:flex;justify-content:center;align-items:center;gap:9px;min-height:58px;border:0;border-radius:18px;background:var(--blue);color:#fff;box-shadow:0 7px 0 #2c4bbc;font-size:17px;font-weight:950;padding:12px 14px}.primary:active:not(:disabled){transform:translateY(3px);box-shadow:0 4px 0 #2c4bbc}.primary:disabled{opacity:.46;box-shadow:none}.secondary{min-height:54px;width:100%;border:2px solid #dce4ff;border-radius:17px;background:#fff;color:var(--blue-d);font-size:15px;font-weight:900;padding:12px}.mini-tip{text-align:center;font-size:12px;color:#8793ac;margin:14px 3px 0;line-height:1.45}
+.summary-hero{position:relative;overflow:hidden;background:linear-gradient(145deg,#4267e6,#7489ec);border-radius:29px;text-align:center;color:#fff;padding:22px 20px 27px;box-shadow:0 14px 34px #4167e62b}.summary-hero:before{position:absolute;content:"✦";font-size:90px;color:#ffffff24;right:10px;top:-35px}.summary-trophy{font-size:44px;display:block}.summary-hero h1{font-size:27px;margin:7px 0;letter-spacing:-.8px}.summary-hero p{font-size:14px;line-height:1.55;max-width:330px;margin:8px auto 0;color:#eef1ff}.score-line{display:flex;justify-content:center;align-items:baseline;gap:5px;margin:13px 0}.score-line strong{font-size:63px;line-height:1;font-weight:950}.score-line span{font-weight:850;font-size:20px;opacity:.88}.summary-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0 22px}.stat{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 7px;min-height:91px}.stat strong{font-size:26px}.stat small{font-size:11px;color:var(--sub);line-height:1.35;font-weight:770}.results-head{font-size:18px;letter-spacing:-.4px;margin:20px 0 12px}.results-list{display:grid;gap:9px}.result-row{display:flex;align-items:flex-start;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 12px}.result-number{border-radius:10px;min-width:33px;height:33px;display:grid;place-items:center;background:#f0f3fc;color:#5b6f9c;font-size:12px;font-weight:950}.result-copy{flex:1;min-width:0}.result-question{display:block;font-size:12.5px;line-height:1.5;font-weight:900}.result-answer{display:block;color:#78849a;font-size:12px;line-height:1.5;margin-top:5px}.result-tag{font-size:10px;font-weight:900;padding:6px 7px;border-radius:10px;white-space:nowrap}.result-tag.first,.result-tag.second{background:#e9f9ef;color:#1b9465}.result-tag.missed{background:#fff0f2;color:#c94b63}.summary-actions{display:grid;gap:14px;margin:22px 0}
+.overlay{position:fixed;inset:0;display:grid;place-items:center;background:#172b5680;padding:22px;z-index:20;backdrop-filter:blur(5px)}.dialog{width:min(100%,420px);background:#fff;text-align:center;border-radius:26px;padding:24px 21px 21px;box-shadow:0 23px 70px #122b6280}.dialog h2{margin:8px 0;font-size:22px}.dialog p{margin:7px 0 20px;color:var(--sub);line-height:1.55;font-size:14px}.dialog-buttons{display:grid;gap:11px}
+@media(max-width:360px){.shell{padding-left:13px;padding-right:13px}.brand-name{font-size:23px}.level{padding:13px}.level-symbol{width:51px;height:51px;flex-basis:51px}.option{min-height:78px}.hero{padding-left:20px;padding-right:20px}}
+@media(prefers-reduced-motion:reduce){.screen{animation:none}*{scroll-behavior:auto!important}}
+
+</style>
+</head>
+<body>
+<div class="shell" id="app"></div>
+<script src="../shared/o-universe.js"></script>
+<script>
+/* Histoires rédigées pour ProblémO! — {a}, {b}, {c} sont remplacés par des nombres. */
+const BANK = {
+  add: [
+    ['🐦','Au jardin, {a} oiseaux picorent des graines. {b} autres oiseaux arrivent.','Combien d’oiseaux y a-t-il maintenant ?'],
+    ['🚗','Léo range {a} petites voitures sur son tapis. Son ami lui en prête {b}.','Combien de voitures Léo a-t-il sur son tapis ?'],
+    ['🧱','Maya construit une tour avec {a} cubes. Elle ajoute {b} cubes.','Combien de cubes utilise-t-elle ?'],
+    ['🍎','Il y a {a} pommes dans une corbeille. Papa y dépose encore {b} pommes.','Combien de pommes sont dans la corbeille ?'],
+    ['⭐','Nina a {a} étoiles sur son cahier. La maîtresse lui en donne {b} de plus.','Combien d’étoiles Nina a-t-elle ?'],
+    ['🐠','Dans un aquarium, {a} poissons nagent. On ajoute {b} nouveaux poissons.','Combien de poissons nagent dans l’aquarium ?'],
+    ['🎈','Sur une table, il y a {a} ballons. Zoé en apporte {b} autres.','Combien de ballons y a-t-il sur la table ?'],
+    ['📚','Dans un panier, il y a {a} livres. Robin en range {b} de plus.','Combien de livres sont dans le panier ?'],
+    ['🪨','Au bord de la rivière, Sam trouve {a} cailloux. Il en ramasse encore {b}.','Combien de cailloux Sam a-t-il ?'],
+    ['🐞','Sur une feuille, il y a {a} coccinelles. {b} autres viennent se poser.','Combien de coccinelles sont sur la feuille ?'],
+    ['🎲','Dans une boîte, Iris a {a} dés. Elle reçoit {b} nouveaux dés.','Combien de dés a-t-elle ?'],
+    ['🍪','Inès prépare {a} biscuits. Son frère en prépare {b} autres.','Combien de biscuits ont-ils préparés ?'],
+    ['🧸','Dans la chambre, il y a {a} peluches sur le lit. Malo en ajoute {b}.','Combien de peluches sont sur le lit ?'],
+    ['🌷','Dans un jardin, {a} tulipes sont ouvertes. {b} autres tulipes s’ouvrent.','Combien de tulipes sont ouvertes ?'],
+    ['✏️','Lina a {a} crayons dans sa trousse. Elle y range {b} crayons de plus.','Combien de crayons a-t-elle ?'],
+    ['🐝','Sur des fleurs, il y a {a} abeilles. {b} autres abeilles les rejoignent.','Combien d’abeilles voit-on ?'],
+    ['🍓','Emma cueille {a} fraises. Elle en trouve {b} autres.','Combien de fraises a-t-elle cueillies ?'],
+    ['🚌','Dans le bus, il y a {a} personnes. {b} autres personnes montent.','Combien de personnes sont dans le bus ?'],
+    ['🎨','Sur une affiche, Noé colle {a} gommettes. Puis il en colle {b} autres.','Combien de gommettes a-t-il collées ?'],
+    ['🏖️','Sur la plage, Jade trouve {a} coquillages. Elle en découvre encore {b}.','Combien de coquillages a-t-elle trouvés ?'],
+    ['🧩','Tom assemble {a} pièces d’un puzzle. Il en place {b} de plus.','Combien de pièces a-t-il placées ?'],
+    ['⚽','Le club possède {a} ballons. On lui offre {b} nouveaux ballons.','Combien de ballons le club possède-t-il ?'],
+    ['🥕','Mamie récolte {a} carottes. Elle en arrache encore {b}.','Combien de carottes a-t-elle récoltées ?'],
+    ['🐢','Dans un bassin, il y a {a} tortues. {b} tortues arrivent d’un autre bassin.','Combien de tortues y a-t-il dans le bassin ?'],
+    ['🎁','Pour la fête, on prépare {a} petits cadeaux. Puis on en prépare {b} autres.','Combien de cadeaux sont prêts ?']
+  ],
+  sub: [
+    ['🐦','Sur une branche, {a} oiseaux sont posés. {b} s’envolent.','Combien d’oiseaux restent sur la branche ?'],
+    ['🖍️','Milo a {a} feutres. Il en prête {b} à son amie.','Combien de feutres lui reste-t-il ?'],
+    ['🍐','Dans un panier, il y a {a} poires. On en mange {b}.','Combien de poires restent dans le panier ?'],
+    ['🎈','Noa a {a} ballons. {b} ballons éclatent.','Combien de ballons lui reste-t-il ?'],
+    ['🐟','Dans un étang, {a} poissons nagent près du bord. {b} poissons s’éloignent.','Combien de poissons restent près du bord ?'],
+    ['🚙','Sur un parking, il y a {a} voitures. {b} voitures repartent.','Combien de voitures restent sur le parking ?'],
+    ['🍪','Sur une assiette, il y a {a} biscuits. Mila en mange {b}.','Combien de biscuits restent sur l’assiette ?'],
+    ['📘','L’école a préparé {a} livres. Elle en distribue {b}.','Combien de livres reste-t-il à distribuer ?'],
+    ['🧸','Dans un coffre, il y a {a} peluches. Eva en sort {b}.','Combien de peluches restent dans le coffre ?'],
+    ['🧱','La tour de Lila comporte {a} cubes. Elle retire {b} cubes.','Combien de cubes reste-t-il dans sa tour ?'],
+    ['🦋','Dans un jardin, {a} papillons volent. {b} papillons s’en vont.','Combien de papillons restent dans le jardin ?'],
+    ['🥚','Dans un panier, il y a {a} œufs. On en prend {b} pour cuisiner.','Combien d’œufs restent dans le panier ?'],
+    ['🍬','Amir possède {a} bonbons. Il en donne {b} à sa sœur.','Combien de bonbons lui reste-t-il ?'],
+    ['🍓','Léa a {a} fraises. Elle en utilise {b} pour un gâteau.','Combien de fraises lui reste-t-il ?'],
+    ['⚽','Dans le gymnase, {a} ballons sont rangés. La classe en prend {b}.','Combien de ballons restent rangés ?'],
+    ['✏️','Sur la table, il y a {a} crayons. On en range {b} dans une boîte.','Combien de crayons restent sur la table ?'],
+    ['🌼','Dans un vase, il y a {a} fleurs. On en retire {b}.','Combien de fleurs restent dans le vase ?'],
+    ['🚌','Dans le bus, {a} personnes voyagent. {b} personnes descendent.','Combien de personnes restent dans le bus ?'],
+    ['🎲','Le jeu contient {a} dés. On en prend {b} pour jouer.','Combien de dés restent dans la boîte ?'],
+    ['🪙','Lou a {a} pièces de monnaie. Elle en dépense {b}.','Combien de pièces lui reste-t-il ?'],
+    ['🧩','Dans une boîte, {a} pièces de puzzle sont rangées. On en sort {b}.','Combien de pièces restent dans la boîte ?'],
+    ['🍅','Dans une cagette, il y a {a} tomates. On en prend {b}.','Combien de tomates restent dans la cagette ?'],
+    ['🎫','Pour la fête, il y a {a} billets. On en distribue {b}.','Combien de billets reste-t-il ?'],
+    ['🧺','Dans un panier, il y a {a} noix. Un écureuil en emporte {b}.','Combien de noix restent dans le panier ?'],
+    ['🍇','Il y a {a} raisins dans un bol. Paul en mange {b}.','Combien de raisins restent dans le bol ?']
+  ],
+  missing: [
+    ['🌟','Pour gagner un badge, Nina doit avoir {a} étoiles. Elle en a déjà {b}.','Combien d’étoiles lui manque-t-il ?'],
+    ['🧩','Un petit puzzle comporte {a} pièces. Tom a déjà posé {b} pièces.','Combien de pièces reste-t-il à poser ?'],
+    ['⚽','Le club veut ranger {a} ballons dans un filet. Il en a déjà mis {b}.','Combien de ballons doit-il encore ranger ?'],
+    ['📚','Pour sa bibliothèque, Eva veut ranger {a} livres. Elle en a rangé {b}.','Combien de livres doit-elle encore ranger ?'],
+    ['🍪','Mia veut préparer {a} biscuits. Elle en a déjà fait {b}.','Combien de biscuits doit-elle encore préparer ?'],
+    ['🎈','Il faut {a} ballons pour décorer la salle. On en a gonflé {b}.','Combien de ballons faut-il encore gonfler ?'],
+    ['🖍️','Une boîte peut contenir {a} crayons. Il y a déjà {b} crayons dedans.','Combien de crayons peut-on encore y mettre ?'],
+    ['🪴','Léon veut planter {a} graines. Il en a planté {b}.','Combien de graines lui reste-t-il à planter ?'],
+    ['🍎','La maîtresse veut distribuer {a} pommes. Elle en a déjà distribué {b}.','Combien de pommes doit-elle encore distribuer ?'],
+    ['🧱','Pour finir son mur, Sami a besoin de {a} briques. Il en a déjà posé {b}.','Combien de briques doit-il encore poser ?'],
+    ['🎨','Lina veut coller {a} gommettes sur sa carte. Elle en a collé {b}.','Combien de gommettes lui reste-t-il à coller ?'],
+    ['🏖️','Jade veut ramasser {a} coquillages. Elle en a déjà trouvé {b}.','Combien de coquillages doit-elle encore trouver ?'],
+    ['🥕','Il faut {a} carottes pour la soupe. On en a épluché {b}.','Combien de carottes reste-t-il à éplucher ?'],
+    ['📮','Le facteur doit distribuer {a} lettres. Il en a déjà distribué {b}.','Combien de lettres lui reste-t-il à distribuer ?'],
+    ['🎁','Pour la fête, il faut préparer {a} pochettes. On en a déjà préparé {b}.','Combien de pochettes manque-t-il ?'],
+    ['🌷','Zoé veut faire un bouquet de {a} tulipes. Elle en a déjà {b}.','Combien de tulipes doit-elle encore trouver ?'],
+    ['🪁','Les enfants veulent fabriquer {a} cerfs-volants. Ils en ont terminé {b}.','Combien de cerfs-volants doivent-ils encore fabriquer ?'],
+    ['🍋','Pour un stand, il faut {a} citrons. Sami en a apporté {b}.','Combien de citrons manque-t-il ?']
+  ],
+  compare: [
+    ['🍬','Noé a {a} bonbons. Lou en a {b}.','Combien de bonbons Noé a-t-il de plus que Lou ?'],
+    ['🎲','Zoé possède {a} dés. Léo en possède {b}.','Combien de dés Zoé a-t-elle de plus que Léo ?'],
+    ['📚','La classe A lit {a} livres. La classe B en lit {b}.','Combien de livres la classe A lit-elle de plus ?'],
+    ['⚽','L’équipe rouge a {a} points. L’équipe bleue a {b} points.','Combien de points l’équipe rouge a-t-elle de plus ?'],
+    ['🌼','Dans un jardin, il y a {a} fleurs jaunes et {b} fleurs blanches.','Combien y a-t-il de fleurs jaunes de plus ?'],
+    ['🐤','À la ferme, on voit {a} poussins et {b} canetons.','Combien y a-t-il de poussins de plus ?'],
+    ['🚗','Dans le garage, il y a {a} voitures rouges et {b} voitures bleues.','Combien y a-t-il de voitures rouges de plus ?'],
+    ['🎈','Nina a {a} ballons et Milo en a {b}.','Combien Nina a-t-elle de ballons de plus ?'],
+    ['🧩','Anna a placé {a} pièces de puzzle. Robin en a placé {b}.','Combien de pièces Anna a-t-elle placées de plus ?'],
+    ['📒','Lina a {a} feuilles de papier. Tom en a {b}.','Combien de feuilles Lina a-t-elle de plus ?'],
+    ['🍎','Dans deux paniers, il y a {a} pommes dans le premier et {b} dans le second.','Combien de pommes le premier panier a-t-il de plus ?'],
+    ['🎨','Émilie a collé {a} gommettes et Sam en a collé {b}.','Combien de gommettes Émilie a-t-elle collées de plus ?'],
+    ['🪨','Jade a trouvé {a} cailloux et Léo en a trouvé {b}.','Combien de cailloux Jade a-t-elle trouvés de plus ?'],
+    ['🥨','Un boulanger vend {a} bretzels le matin et {b} l’après-midi.','Combien en vend-il de plus le matin ?'],
+    ['🐢','Dans un bassin, il y a {a} tortues vertes et {b} tortues brunes.','Combien y a-t-il de tortues vertes de plus ?'],
+    ['🧺','Dans un panier, on compte {a} noix et {b} noisettes.','Combien y a-t-il de noix de plus que de noisettes ?']
+  ],
+  part: [
+    ['🎒','Dans la classe, il y a {a} élèves. {b} ont un sac bleu.','Combien d’élèves n’ont pas de sac bleu ?'],
+    ['🍎','Sur une table, il y a {a} fruits. {b} sont des pommes.','Combien de fruits ne sont pas des pommes ?'],
+    ['🧸','Dans une boîte, il y a {a} jouets. {b} sont des peluches.','Combien de jouets ne sont pas des peluches ?'],
+    ['🌷','Dans un bouquet, il y a {a} fleurs. {b} sont rouges.','Combien de fleurs ne sont pas rouges ?'],
+    ['⚽','Au parc, il y a {a} enfants. {b} jouent au ballon.','Combien d’enfants ne jouent pas au ballon ?'],
+    ['📚','Sur une étagère, il y a {a} livres. {b} sont des bandes dessinées.','Combien ne sont pas des bandes dessinées ?'],
+    ['🐦','Dans le jardin, on voit {a} oiseaux. {b} sont des moineaux.','Combien d’oiseaux ne sont pas des moineaux ?'],
+    ['🎲','Dans une boîte, on trouve {a} dés. {b} sont rouges.','Combien de dés ne sont pas rouges ?'],
+    ['🚗','Sur un parking, il y a {a} voitures. {b} sont blanches.','Combien de voitures ne sont pas blanches ?'],
+    ['🥚','Dans un panier, il y a {a} œufs. {b} sont décorés.','Combien d’œufs ne sont pas décorés ?'],
+    ['🦋','Sur une affiche, il y a {a} papillons. {b} sont jaunes.','Combien de papillons ne sont pas jaunes ?'],
+    ['✏️','Dans un pot, il y a {a} crayons. {b} sont taillés.','Combien de crayons ne sont pas taillés ?'],
+    ['🎁','On a préparé {a} cadeaux. {b} ont un ruban.','Combien de cadeaux n’ont pas de ruban ?'],
+    ['🍪','Dans une boîte, il y a {a} biscuits. {b} sont au chocolat.','Combien de biscuits ne sont pas au chocolat ?']
+  ],
+  two: [
+    ['🧸','Léa a {a} peluches. Elle en reçoit {b}, puis en donne {c}.','Combien de peluches lui reste-t-il ?','+-'],
+    ['🐦','Sur une branche, il y a {a} oiseaux. {b} arrivent, puis {c} s’envolent.','Combien d’oiseaux restent sur la branche ?','+-'],
+    ['🍎','Dans une caisse, il y a {a} pommes. On en ajoute {b}, puis on en prend {c}.','Combien de pommes restent dans la caisse ?','+-'],
+    ['📚','La bibliothèque a {a} livres. Elle en reçoit {b}, puis en prête {c}.','Combien de livres reste-t-il ?','+-'],
+    ['⚽','Dans un sac, il y a {a} ballons. On en retire {b}, puis on en ajoute {c}.','Combien de ballons contient le sac ?','-+'],
+    ['🚙','Dans un parking, il y a {a} voitures. {b} partent et {c} arrivent.','Combien de voitures restent sur le parking ?','-+'],
+    ['🍪','Inès a {a} biscuits. Elle en mange {b}, puis en prépare {c} autres.','Combien de biscuits a-t-elle maintenant ?','-+'],
+    ['🎨','Sur une affiche, il y a {a} gommettes. Noa en décolle {b}, puis en colle {c}.','Combien de gommettes sont sur l’affiche ?','-+'],
+    ['🎈','Dans une salle, il y a {a} ballons. On en apporte {b}, puis encore {c}.','Combien de ballons y a-t-il finalement ?','++'],
+    ['🧱','Malo a construit une tour de {a} cubes. Il ajoute {b} cubes, puis encore {c}.','Combien de cubes sont dans sa tour ?','++'],
+    ['🌷','On plante {a} tulipes le lundi, {b} le mardi et {c} le mercredi.','Combien de tulipes a-t-on plantées en tout ?','++'],
+    ['📦','Une boîte contient {a} cartes. On en range {b} de plus, puis encore {c}.','Combien de cartes contient la boîte ?','++'],
+    ['🍓','Mila a cueilli {a} fraises. Elle en donne {b} à Tom, puis {c} à Nina.','Combien de fraises lui reste-t-il ?','--'],
+    ['✏️','Il y a {a} crayons dans un pot. On en prend {b}, puis encore {c}.','Combien de crayons restent dans le pot ?','--'],
+    ['🪁','L’école prépare {a} cerfs-volants. Elle en distribue {b}, puis {c} autres.','Combien de cerfs-volants reste-t-il ?','--'],
+    ['🐢','Dans un bassin, il y a {a} tortues. {b} vont sur la berge, puis {c} autres les suivent.','Combien de tortues restent dans l’eau ?','--'],
+    ['🧩','Eva trouve {a} pièces de puzzle. Puis elle en trouve {b} et encore {c}.','Combien de pièces a-t-elle trouvées en tout ?','++'],
+    ['🎲','Au début, il y a {a} dés sur la table. On en retire {b}, puis on en remet {c}.','Combien de dés sont sur la table à la fin ?','-+'],
+    ['🏖️','Léo a {a} coquillages. Il en ramasse {b} autres et en donne {c} à Lou.','Combien de coquillages Léo garde-t-il ?','+-'],
+    ['🍬','Dans un sachet, il y a {a} bonbons. On en mange {b}, puis on en ajoute {c}.','Combien de bonbons sont dans le sachet maintenant ?','-+']
+  ],
+  extra: [
+    ['🎨','Sur une table, il y a {a} feutres rouges et {x} feutres bleus. On ajoute {b} feutres rouges.','Combien y a-t-il maintenant de feutres rouges ?','+'],
+    ['🍎','Un panier contient {a} pommes et {x} poires. On mange {b} pommes.','Combien de pommes restent dans le panier ?','-'],
+    ['🐦','Dans un parc, il y a {a} pigeons et {x} moineaux. {b} autres pigeons arrivent.','Combien de pigeons y a-t-il maintenant ?','+'],
+    ['🎈','Pour un anniversaire, on a {a} ballons rouges et {x} ballons jaunes. {b} ballons rouges éclatent.','Combien de ballons rouges reste-t-il ?','-'],
+    ['📚','Sur une étagère, il y a {a} romans et {x} dictionnaires. On ajoute {b} romans.','Combien y a-t-il de romans maintenant ?','+'],
+    ['🚙','Dans un garage, il y a {a} voitures et {x} vélos. {b} voitures repartent.','Combien de voitures restent dans le garage ?','-'],
+    ['🐢','Dans un bassin, il y a {a} tortues et {x} poissons. On ajoute {b} tortues.','Combien de tortues sont dans le bassin ?','+'],
+    ['🧸','Dans un coffre, il y a {a} peluches et {x} poupées. On retire {b} peluches.','Combien de peluches restent dans le coffre ?','-'],
+    ['🍪','Dans la cuisine, il y a {a} biscuits au chocolat et {x} bonbons. On prépare {b} autres biscuits au chocolat.','Combien y a-t-il de biscuits au chocolat ?','+'],
+    ['🌷','Dans un massif, on compte {a} tulipes et {x} roses. {b} tulipes sont coupées.','Combien de tulipes restent dans le massif ?','-'],
+    ['⚽','Le club possède {a} ballons et {x} chasubles. On achète {b} ballons.','Combien de ballons possède-t-il maintenant ?','+'],
+    ['🥕','Dans la cuisine, il y a {a} carottes et {x} pommes de terre. On utilise {b} carottes.','Combien de carottes restent ?','-'],
+    ['🎫','Pour la fête, on a {a} tickets bleus et {x} tickets verts. On distribue {b} tickets bleus.','Combien de tickets bleus reste-t-il ?','-'],
+    ['🧩','Maya a {a} pièces de puzzle et {x} crayons. Elle reçoit {b} pièces de puzzle.','Combien de pièces de puzzle Maya a-t-elle maintenant ?','+'],
+    ['🍓','Au marché, il y a {a} barquettes de fraises et {x} de framboises. On vend {b} barquettes de fraises.','Combien de barquettes de fraises restent ?','-'],
+    ['🪙','Dans une boîte, il y a {a} pièces de 1 euro et {x} jetons. On ajoute {b} pièces de 1 euro.','Combien de pièces de 1 euro y a-t-il ?','+']
+  ]
+};
+
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const app=$('app');
+const LEVELS=[
+  {name:'Facile', desc:'J’ajoute ou j’enlève de petites quantités.',sub:'Des nombres jusqu’à 10',example:'« 4 oiseaux et 3 autres… »',types:['add','sub','add','sub','add','sub','add','sub','add','sub']},
+  {name:'Moyen', desc:'Je cherche ce qui manque et je compare.',sub:'Des nombres jusqu’à 20',example:'« Combien lui en manque-t-il ? »',types:['add','sub','missing','compare','sub','add','missing','compare','add','sub']},
+  {name:'Avancé',desc:'Je résous des problèmes en plusieurs étapes.',sub:'Des nombres jusqu’à 50',example:'« Il en gagne, puis en donne… »',types:['two','extra','two','compare','missing','two','part','extra','compare','part']}
+];
+const DESCRIPTIONS={add:'Des objets sont ajoutés.',sub:'Des objets sont retirés.',missing:'Il faut trouver ce qui manque.',compare:'Il faut comparer deux quantités.',part:'On connaît le tout et une partie.',two:'Deux événements se suivent.',extra:'Attention à l’information inutile.'};
+const TOOL_HINTS={add:'Place les jetons du début, puis ajoute ceux qui arrivent.',sub:'Place les jetons du début, puis enlève ceux qui partent.',missing:'Pars de la quantité déjà obtenue et compte les jetons à ajouter.',compare:'Pars du plus petit nombre, puis ajoute des jetons jusqu’au plus grand.',part:'Pars du total, puis enlève les objets de la partie connue.',two:'Pars du début. Suis les deux événements dans l’ordre.',extra:'Lis bien : seuls les objets demandés comptent.'};
+const MIX={add:'➕ On ajoute',sub:'➖ On enlève',missing:'🔍 Ce qui manque',compare:'⚖️ On compare',part:'🧩 Tout et partie',two:'🪄 Deux étapes',extra:'🕵️ Un nombre intrus'};
+const KEY=(window.OUniverse&&window.OUniverse.storageKey('problemo_cp_progress_v1'))||'problemo_cp_progress_v1';
+const randomInt=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const shuffle=arr=>{for(let i=arr.length-1;i>0;i--){const j=randomInt(0,i);[arr[i],arr[j]]=[arr[j],arr[i]];}return arr};
+const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let history={levels:[{recent:[],keys:[],best:null,games:0},{recent:[],keys:[],best:null,games:0},{recent:[],keys:[],best:null,games:0}]};
+try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved&&Array.isArray(saved.levels)&&saved.levels.length===3) history=saved}catch(e){}
+for(let i=0;i<3;i++)history.levels[i]=Object.assign({recent:[],keys:[],best:null,games:0},history.levels[i]||{});
+function save(){try{localStorage.setItem(KEY,JSON.stringify(history))}catch(e){}}
+function varsFor(type,lev,mode){let a,b,c=0,x=0,answer,stages=[],toolStart,toolGoal=null,toolLabel='';
+  if(lev===0){
+    if(type==='add'){a=randomInt(2,7);b=randomInt(2,Math.min(8,10-a));answer=a+b;toolStart=a}
+    else {a=randomInt(4,10);b=randomInt(2,a-1);answer=a-b;toolStart=a}
+  }else if(lev===1){
+    if(type==='add'){a=randomInt(8,17);b=randomInt(2,Math.min(9,20-a));answer=a+b;toolStart=a}
+    else if(type==='sub'){a=randomInt(11,20);b=randomInt(2,Math.min(10,a-2));answer=a-b;toolStart=a}
+    else if(type==='missing'){a=randomInt(11,20);b=randomInt(3,a-2);answer=a-b;toolStart=b;toolGoal=a}
+    else {a=randomInt(10,20);b=randomInt(2,a-2);answer=a-b;toolStart=b;toolGoal=a}
+  }else{
+    if(type==='two'){
+      const sig=mode||'+-';
+      for(let k=0;k<100;k++){
+        a=randomInt(12,28);b=randomInt(2,9);c=randomInt(2,9);
+        const m=sig[0]==='+'?a+b:a-b, result=sig[1]==='+'?m+c:m-c;
+        if(m>=3&&m<=45&&result>=2&&result<=45){answer=result;stages=[m,result];break}
+      }
+      toolStart=a;toolLabel='Fais les deux étapes, l’une après l’autre.';
+    }else if(type==='extra'){
+      x=randomInt(2,12);a=randomInt(15,30);b=randomInt(2,9);answer=mode==='+'?a+b:a-b;toolStart=a;
+    }else if(type==='missing'){
+      a=randomInt(20,45);const delta=randomInt(3,Math.min(20,a-4));b=a-delta;answer=delta;toolStart=b;toolGoal=a;
+    }else if(type==='compare'){
+      a=randomInt(20,45);b=randomInt(Math.max(4,a-20),a-3);answer=a-b;toolStart=b;toolGoal=a;
+    }else if(type==='part'){
+      a=randomInt(16,43);b=randomInt(Math.max(4,a-23),a-3);answer=a-b;toolStart=a;
+    }
+  }
+  if(type==='add')stages=[a+b];
+  if(type==='sub'||type==='missing'||type==='compare'||type==='part')stages=[a-b];
+  if(type==='extra')stages=[answer];
+  if(toolGoal!==null)toolLabel='Cherche combien de jetons il faut ajouter.';
+  if(type==='two'&&!Number.isInteger(answer))return varsFor(type,lev,mode);
+  return {a,b,c,x,answer,stages,toolStart,toolGoal,toolLabel};
+}
+function explanation(type,mode,v){const {a,b,c,x,answer,stages}=v;
+  if(type==='add')return `On ajoute : ${a} + ${b} = ${answer}.`;
+  if(type==='sub')return `On retire : ${a} − ${b} = ${answer}.`;
+  if(type==='missing')return `Il faut compléter ${b} jusqu’à ${a} : ${a} − ${b} = ${answer}.`;
+  if(type==='compare')return `On cherche la différence : ${a} − ${b} = ${answer}.`;
+  if(type==='part')return `On connaît le total : ${a} − ${b} = ${answer}.`;
+  if(type==='extra')return mode==='+'?`Les ${x} autres objets ne servent pas. ${a} + ${b} = ${answer}.`:`Les ${x} autres objets ne servent pas. ${a} − ${b} = ${answer}.`;
+  const op1=mode[0]==='+'?'+':'−',op2=mode[1]==='+'?'+':'−';
+  return `Étape 1 : ${a} ${op1} ${b} = ${stages[0]}. Étape 2 : ${stages[0]} ${op2} ${c} = ${answer}.`;
+}
+function chooseOptions(q,lev){const v=q.vars,ans=v.answer,limit=lev===0?10:lev===1?22:50;
+  let candidates=[ans-1,ans+1,ans-2,ans+2,ans-3,ans+3, v.a+v.b,Math.abs(v.a-v.b),v.a,v.b,v.a+v.b+v.c,v.a+v.b-v.c,v.a-v.b+v.c];
+  if(q.kind==='extra')candidates.push(ans+v.x,ans-v.x);
+  if(q.kind==='two')candidates.push(v.stages[0]);
+  candidates=shuffle([...new Set(candidates.filter(n=>Number.isInteger(n)&&n>=0&&n<=limit&&n!==ans))]);
+  const choices=[ans];
+  for(const n of candidates){if(choices.length===3)break;choices.push(n)}
+  for(let n=0;choices.length<3&&n<=limit;n++)if(!choices.includes(n))choices.push(n);
+  return shuffle(choices);
+}
+function newQuestion(lev,kind,templateIndex){const row=BANK[kind][templateIndex];const mode=row[3]||'';let q;const state=history.levels[lev];
+  for(let k=0;k<120;k++){
+    const v=varsFor(kind,lev,mode),signature=`${kind}:${templateIndex}:${v.a}:${v.b}:${v.c}:${v.x}`;
+    if(!state.keys.includes(signature)||k>=119){
+      let passage=row[1].replace(/\{([abcx])\}/g,(_,p)=>String(v[p]));
+      q={kind,id:`${kind}:${templateIndex}`,signature,emoji:row[0],passage,ask:row[2],vars:v,explain:explanation(kind,mode,v),options:[],answer:v.answer,mode};
+      q.options=chooseOptions(q,lev);break;
+    }
+  }
+  return q;
+}
+function makeRound(lev){const state=history.levels[lev],used=[];const kinds=shuffle([...LEVELS[lev].types]);const result=[];
+  for(const kind of kinds){
+    let pool=BANK[kind].map((_,i)=>i).filter(i=>!used.includes(`${kind}:${i}`));
+    const distant=pool.filter(i=>!state.recent.includes(`${kind}:${i}`));
+    if(distant.length)pool=distant;
+    const templateIndex=pool[randomInt(0,pool.length-1)];
+    const q=newQuestion(lev,kind,templateIndex);result.push(q);used.push(q.id);
+  }
+  state.recent.push(...result.map(q=>q.id));state.recent=state.recent.slice(-45);
+  state.keys.push(...result.map(q=>q.signature));state.keys=state.keys.slice(-900);
+  save();return result;
+}
+let screen='home',level=0,round=[],index=0,selected=null,feedback='idle',attempts=[],openTool=false,toolCount=0,toolActions=0,askExit=false;
+function brand(){return `<header class="topbar"><div class="brand"><div class="brand-mark" aria-hidden="true">?</div><div class="brand-name">Problém<span>O!</span></div></div><span class="top-note">Spécial CP</span></header>`}
+function home(){return `<main class="screen"><section class="hero"><div class="hero-kicker">Je lis · Je cherche · Je trouve</div><h1>À toi de résoudre les énigmes !</h1><p>10 petits problèmes, des jetons pour t’aider et deux chances pour répondre.</p><span class="hero-star" aria-hidden="true">✦</span></section><h2 class="choose-title">Choisis ton niveau</h2><div class="level-list">${LEVELS.map((l,i)=>`<button type="button" class="level" data-level="${i}" aria-label="Niveau ${i+1} : ${html(l.name)}"><span class="level-symbol">${i+1}</span><span class="level-copy"><span class="level-name">${html(l.name)}</span><span class="level-desc">${html(l.desc)}</span><span class="level-mini">${html(l.sub)}</span>${history.levels[i].best!==null?`<span class="best">🏆 Meilleur score : ${history.levels[i].best}/10</span>`:''}</span><span class="level-arrow" aria-hidden="true">›</span></button>`).join('')}</div><div class="mini-features"><div class="mini-feature"><strong>10</strong>problèmes</div><div class="mini-feature"><strong>2</strong>essais</div><div class="mini-feature"><strong>🧮</strong>jetons d’aide</div></div><p class="footer-hint">Pas de chronomètre. Cherche à ton rythme ! 🌈</p></main>`}
+function progressDots(){return round.map((q,i)=>`<span class="dot ${i<index?(attempts[i].success?'done':'missed'):i===index?'current':''}" aria-hidden="true"></span>`).join('')}
+function chips(count){const tens=Math.floor(count/10),units=count%10;
+  const blocks=Array.from({length:tens},()=>`<span class="ten-block" aria-label="une dizaine">${Array.from({length:10},()=>'<i></i>').join('')}</span>`).join('');
+  const dots=Array.from({length:units},()=>'<span class="single-counter" aria-hidden="true"></span>').join('');
+  return count===0?'<span class="empty-counter">La boîte est vide.</span>':`<div class="counter-groups">${blocks}${dots?`<span class="loose-counters">${dots}</span>`:''}</div>`;
+}
+function toolMarkup(q){const v=q.vars;
+  return `<div class="tool-wrap"><button class="tool-toggle" type="button" data-action="toggle-tool" aria-expanded="${openTool}" aria-controls="tool-panel"><span>🧮 ${openTool?'Masquer les jetons':'Je m’aide avec des jetons'}</span><span aria-hidden="true">${openTool?'−':'+'}</span></button>${openTool?`<div class="tool-panel" id="tool-panel"><div class="tool-title">Mes jetons à manipuler</div><p class="tool-hint">${html(TOOL_HINTS[q.kind])}</p><div class="counter-count"><span>Dans ma boîte</span><strong aria-live="polite">${toolCount}</strong></div><div class="counter-display" aria-label="${toolCount} jetons">${chips(toolCount)}</div><div class="tool-buttons"><button type="button" data-action="minus-token" aria-label="Retirer un jeton" ${toolCount===0?'disabled':''}><span>−</span> Enlever 1</button><button type="button" data-action="plus-token" aria-label="Ajouter un jeton" ${toolCount===50?'disabled':''}><span>+</span> Ajouter 1</button></div><div class="tool-footer"><span>${toolCount===v.toolStart?'Départ : aucun changement.':toolCount>v.toolStart?`Tu as ajouté ${toolCount-v.toolStart} jeton${toolCount-v.toolStart>1?'s':''}.`:`Tu as enlevé ${v.toolStart-toolCount} jeton${v.toolStart-toolCount>1?'s':''}.`}</span><button type="button" data-action="reset-token">Recommencer</button></div></div>`:''}</div>`;
+}
+function game(){const q=round[index],r=attempts[index],finished=feedback==='good'||feedback==='missed';
+ const fb=feedback==='good'?`<div class="feedback good" role="status" aria-live="polite"><div class="feedback-title">✓ CORRECT</div><div class="feedback-sub">${r.tries.length===1?'Super, tu as trouvé !':'Bravo, tu as trouvé au deuxième essai !'}</div></div>`:feedback==='retry'?`<div class="feedback bad" role="status" aria-live="polite"><div class="feedback-title">✕ ERREUR</div><div class="feedback-sub">Relis le problème. Tu peux essayer encore une fois.</div></div>`:feedback==='missed'?`<div class="feedback bad" role="status" aria-live="polite"><div class="feedback-title">✕ ERREUR</div><div class="feedback-sub">La réponse était ${q.answer}. Tu vas apprendre avec la correction.</div></div>`:`<div class="feedback idle" role="status" aria-live="polite"><div class="feedback-sub">Lis, cherche et choisis une réponse.</div></div>`;
+ return `<main class="screen"><div class="game-top"><button class="go-back" type="button" data-action="ask-exit" aria-label="Quitter la partie">‹</button><div class="game-top-title"><strong>Problèmes · ${html(LEVELS[level].name)}</strong><small>Réfléchis à ton rythme</small></div><span class="top-spacer"></span></div><div class="progress-heading"><span>Ta progression</span><strong>${index+1} / 10</strong></div><div class="progress-dots" aria-label="Problème ${index+1} sur 10">${progressDots()}</div><section class="question-card"><div class="problem-header"><span class="task-label">${MIX[q.kind]}</span><span class="story-emoji" aria-hidden="true">${q.emoji}</span></div><p class="passage">${html(q.passage)}</p><p class="question-line">${html(q.ask)}</p></section>${toolMarkup(q)}<div class="answer-heading">Quelle est la bonne réponse ?</div><div class="option-list" role="group" aria-label="Réponses possibles">${q.options.map((val,i)=>{
+  const isWrong=r.tries.includes(val)&&val!==q.answer,correct=finished&&val===q.answer,sel=selected===val&&!finished;
+  return `<button type="button" class="option ${isWrong?'wrong':''} ${correct?'correct':''} ${sel?'selected':''}" data-choice="${i}" aria-pressed="${sel}" ${finished||isWrong?'disabled':''}><span class="option-letter">${correct?'✓':isWrong?'×':i+1}</span><span class="answer-number">${val}</span></button>`}).join('')}</div>${fb}${finished?`<section class="reason"><span>💡 Comment trouver ?</span><p>${html(q.explain)}</p></section>`:''}<div class="action-area">${finished?`<button class="primary" type="button" data-action="next">${index===9?'Voir mon bilan':'Problème suivant'} <span aria-hidden="true">→</span></button>`:`<button class="primary" type="button" data-action="check" ${selected===null?'disabled':''}>Je valide ✓</button>`}</div><p class="mini-tip">${finished?'Continue quand tu es prêt.':feedback==='retry'?'Il reste une deuxième chance.':'Tu peux utiliser les jetons pour t’aider.'}</p></main>`;
+}
+function summary(){const first=attempts.filter(r=>r.success&&r.tries.length===1).length,second=attempts.filter(r=>r.success&&r.tries.length===2).length,missed=10-first-second,score=first+second;
+ let msg=score===10?'Tous tes problèmes sont réussis ! Continue à chercher de nouvelles solutions.':score>=7?'Très bon travail ! Les prochains problèmes t’aideront à progresser encore.':score>=4?'Tu avances bien ! Relire le problème et utiliser les jetons peut t’aider.':'Tu as terminé les dix problèmes ! Chaque nouvel essai t’aide à mieux comprendre.';
+ return `<main class="screen"><div class="game-top"><button class="go-back" type="button" data-action="home" aria-label="Retour à l’accueil">‹</button><div class="game-top-title"><strong>Mon bilan</strong><small>Problèmes · ${LEVELS[level].name}</small></div><span class="top-spacer"></span></div><section class="summary-hero"><span class="summary-trophy" aria-hidden="true">🏆</span><h1>Bravo, petit chercheur !</h1><div class="score-line"><strong>${score}</strong><span>/ 10 réussis</span></div><p>${msg}</p></section><div class="summary-stats"><div class="stat"><strong>${first}</strong><small>Du premier coup</small></div><div class="stat"><strong>${second}</strong><small>Au deuxième essai</small></div><div class="stat"><strong>${missed}</strong><small>À retravailler</small></div></div><h2 class="results-head">Mes dix problèmes 🧩</h2><div class="results-list">${round.map((q,i)=>{
+ const r=attempts[i],isFirst=r.success&&r.tries.length===1,kind=!r.success?'missed':isFirst?'first':'second';const status=!r.success?'À revoir':isFirst?'✓ 1er essai':'✓ 2e essai';
+ return `<div class="result-row"><span class="result-number">${String(i+1).padStart(2,'0')}</span><div class="result-copy"><span class="result-question">${q.emoji} ${html(q.ask)}</span><span class="result-answer">${html(q.explain)}</span></div><span class="result-tag ${kind}">${status}</span></div>`}).join('')}</div><div class="summary-actions"><button class="primary" type="button" data-action="replay">↻ Rejouer ce niveau</button><button class="secondary" type="button" data-action="home">Choisir un autre niveau</button></div></main>`;
+}
+function dialog(){return `<div class="overlay" role="presentation"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="exit-title"><span style="font-size:39px" aria-hidden="true">🧩</span><h2 id="exit-title">Quitter cette partie ?</h2><p>Tu n’as pas encore terminé les dix problèmes. Tu pourras recommencer plus tard.</p><div class="dialog-buttons"><button class="secondary" data-action="cancel-exit">Je continue</button><button class="primary" data-action="exit">Je quitte</button></div></section></div>`}
+function render(){app.innerHTML=(screen==='home'?brand()+home():screen==='game'?game():summary())+(askExit?dialog():'');bind()}
+function goTop(){window.scrollTo({top:0,behavior:'instant'})}
+function resetTool(){openTool=false;toolCount=round[index].vars.toolStart;toolActions=0}
+function start(lev){level=lev;round=makeRound(lev);attempts=round.map(()=>({tries:[],success:false}));index=0;selected=null;feedback='idle';askExit=false;screen='game';resetTool();render();goTop()}
+function choose(i){if(screen!=='game'||askExit||['good','missed'].includes(feedback))return;const val=round[index].options[i];if(val===undefined||attempts[index].tries.includes(val))return;selected=val;render()}
+function check(){if(screen!=='game'||selected===null||askExit||['good','missed'].includes(feedback))return;const res=attempts[index],q=round[index];res.tries.push(selected);if(selected===q.answer){res.success=true;feedback='good'}else{feedback=res.tries.length>=2?'missed':'retry'}selected=null;render()}
+function next(){if(screen!=='game'||!['good','missed'].includes(feedback))return;if(index===9){screen='summary';const score=attempts.filter(r=>r.success).length;const firstTry=attempts.filter(r=>r.success&&r.tries.length===1).length;const secondTry=attempts.filter(r=>r.success&&r.tries.length===2).length;const missed=10-score;const state=history.levels[level];state.games++;state.best=Math.max(state.best??0,score);save();if(window.OUniverse){window.OUniverse.recordSession({game:'problemo',levelKey:`level_${level}`,levelName:['Facile','Moyen','Avancé'][level],score,total:10,firstTry,secondTry,missed});}}else{index++;selected=null;feedback='idle';resetTool()}render();goTop()}
+function goHome(){screen='home';askExit=false;render();goTop()}
+function moveTokens(n){const val=toolCount+n;if(val<0||val>50)return;toolCount=val;toolActions++;render()}
+function bind(){app.querySelectorAll('[data-level]').forEach(el=>el.addEventListener('click',()=>start(Number(el.dataset.level))));
+ app.querySelectorAll('[data-choice]').forEach(el=>el.addEventListener('click',()=>choose(Number(el.dataset.choice))));
+ app.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',()=>{switch(el.dataset.action){
+  case 'check':check();break;case 'next':next();break;case 'replay':start(level);break;case 'home':goHome();break;case 'ask-exit':askExit=true;render();break;case 'cancel-exit':askExit=false;render();break;case 'exit':goHome();break;
+  case 'toggle-tool':openTool=!openTool;render();break;case 'plus-token':moveTokens(1);break;case 'minus-token':moveTokens(-1);break;case 'reset-token':toolCount=round[index].vars.toolStart;toolActions=0;render();break;
+ } }));}
+window.addEventListener('keydown',e=>{if(askExit){if(e.key==='Escape'){askExit=false;render()}return}if(screen!=='game'||e.ctrlKey||e.altKey||e.metaKey)return;
+ if(/^[123]$/.test(e.key)){e.preventDefault();choose(Number(e.key)-1)}else if(e.key==='Enter'){e.preventDefault();if(['good','missed'].includes(feedback))next();else check()}});
+render();
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+})();
+
+</script>
+</body>
+</html>
